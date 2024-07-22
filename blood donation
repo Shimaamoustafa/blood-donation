@@ -1,0 +1,298 @@
+#include <iostream>
+#include<string>
+using namespace std;
+struct boold{
+    string type;
+    string quantity;
+    string receivedDate;
+    string expiryDate;
+    boold*next;
+
+};
+boold*frontboold=NULL;
+boold*rearboold=NULL;
+void inserboold(string type1, string quantity1,string receivedDate1,string expiryDate1){
+    boold*new_node=new boold;
+new_node->type=type1;
+new_node->quantity=quantity1;
+new_node->receivedDate=receivedDate1;
+new_node->expiryDate=expiryDate1;
+if(frontboold==NULL&&rearboold==NULL){
+            frontboold=new_node;
+            rearboold=new_node;
+            new_node->next=NULL;
+        }
+        else{
+            rearboold=new_node;
+            new_node->next=NULL;
+        }
+
+}
+    void displayInfo() {
+        boold*temp=frontboold;
+        while(temp->next!=NULL){
+        cout << "Donor Name: " << temp->type << endl;
+        cout << "Quantity: " << temp->quantity << " ml" << endl;
+        cout << "Received Date: " << temp->receivedDate << endl;
+        cout << "Expiry Date: " << temp->expiryDate << endl;
+        temp=temp->next;
+        }
+    }
+
+struct noderecipient{
+        string id;
+        string name;
+        string password;
+        string gender;
+        string bloodtype;
+        int age;
+        string mail;
+        string hospital;
+        string doctorTheCace;
+        noderecipient*next;
+    };
+     noderecipient *front1=NULL;
+    noderecipient *rear1=NULL;
+    struct nodedoner{
+        string id;
+        string name;
+        string password;
+        string gender;
+        string bloodtype;
+        int age;
+        string mail;
+        int disease;
+        int takeanymedicin;
+        string data;
+        nodedoner*next;
+    };
+    nodedoner *front2=NULL;
+    nodedoner *rear2=NULL;
+    void logindoner(string id,string name,string password,string gender , string bloodtype, int age, string mail,int disease,int takeanymedicin,string data){
+        nodedoner*new_node=new nodedoner;
+        new_node->id=id;
+        new_node->name=name;
+        new_node->password=password;
+        new_node->gender=gender;
+        new_node->bloodtype=bloodtype;
+        new_node->age=age;
+        new_node->mail=mail;
+        new_node->disease=disease;
+        new_node->takeanymedicin=takeanymedicin;
+        new_node->data=data;
+        if(front2==NULL&&rear2==NULL){
+            front2=new_node;
+            rear2=new_node;
+            new_node->next=NULL;
+        }
+        else{
+            rear2=new_node;
+            new_node->next=NULL;
+        }
+       
+   
+    }
+        //---------------------------------------------------------------------//
+       
+    void loginrecipient(string id,string name,string password,string gender , string bloodtype, int age,string mail, string hospital,string doctorTheCace){
+        noderecipient*new_node=new noderecipient;
+        new_node->id=id;
+        new_node->name=name;
+        new_node->password=password;
+        new_node->gender=gender;
+        new_node->bloodtype=bloodtype;
+        new_node->age=age;
+        new_node->mail=mail;
+        new_node->hospital=hospital;
+        new_node->doctorTheCace=doctorTheCace;
+        if(front1==NULL&&rear1==NULL){
+            front1=new_node;
+            rear1=new_node;
+            new_node->next=NULL;
+        }
+        else{
+            rear1=new_node;
+            new_node->next=NULL;
+        }
+    }
+    // string blood;
+    void search(string blood){
+        noderecipient * temp=front1;
+        while(temp->bloodtype!=blood){
+            if(temp->next==NULL){
+                cout<<"sorry,there is no blood type"<<endl;
+                 return ;
+            }
+            else{
+                temp=temp->next;
+            }
+        }
+       cout<<"there is  blood type ,you can collect it form the nearest branch"<<endl;
+    }
+        void deletboold(string blood){
+
+nodedoner * temp=front2;
+             while(temp->bloodtype!=blood){
+                 temp=temp->next;
+             }
+            
+             free(temp);
+        }
+        void deletrecipient(string blood){
+            noderecipient * temp=front1;
+             while(temp->bloodtype!=blood){
+                 temp=temp->next;
+             }
+             free(temp);
+        }
+        void display(){
+            nodedoner * temp=front2;
+             while(temp=NULL){
+                 cout<<temp->bloodtype<<endl;
+                 temp=temp->next;
+             }
+        }
+  void requestBlood() {
+  noderecipient recipient;
+  cout << "Enter required blood type (e.g., O+, AB-): ";
+  cin >> recipient.bloodtype;
+  cout << "Enter the quantity of blood units needed: ";
+  int quantity;
+  cin >> quantity;
+  cout << "Is the recipient currently admitted at a hospital? (y/n): ";
+  char atHospital;
+  cin >> atHospital;
+  if (atHospital == 'y' || atHospital == 'Y') {
+    cout << "Enter the hospital name: ";
+    cin.ignore(); 
+    getline(cin,recipient.hospital);
+  } else {
+    recipient.hospital = "";
+  }
+  cout << "\nBlood Request Confirmation:" << endl;
+  cout << "Blood Type: " << recipient.bloodtype << endl;
+  cout << "Quantity: " << quantity << " units" << endl;
+  cout << "Hospital: " << recipient.hospital << endl;
+  cout << "Are these details correct? (y/n): ";
+  char confirm;
+  cin >> confirm;
+  if (confirm == 'y' || confirm == 'Y');
+   else {
+    cout << "Please re-enter your request details." << endl;
+    requestBlood();
+    
+  }
+}
+ int main(){
+         bool f=true;
+        while(f){
+        string choose;
+         cout<<"you doner and recipient ?"<<endl;
+        cin>>choose;
+        if(choose!="doner" && choose!="recipient"){
+          return 0;
+        }
+        else{
+            string iD;
+        string nAme;
+        string pAssword;
+        string gEnder;
+        string bLoodtype;
+        string mAil;
+        string expiryDate;
+        int aGe;
+        string qu;
+         string receivedDate;
+         cout<<"enter\n";
+         cout<<"id : "<<endl;
+        cin>>iD;
+            cout<<"name : "<<endl;
+        cin>>nAme;
+          cout<<"password : "<<endl;
+       cin>>pAssword;
+         cout<<"gender : "<<endl;
+       cin>>gEnder;
+         cout<<"bLoodtype : "<<endl;
+        cin>>bLoodtype;
+        cout<<"ega : "<<endl;
+        cin>>aGe;
+        if(aGe<17||aGe>=70){
+            return 0;
+        }
+        cout<<"mail : "<<endl;
+        cin>>mAil;
+        if(choose=="doner"){
+        cout<<"entequantity"<<endl;
+        cin>>qu;
+        int dIsease;
+        int tAkeanymedicin;
+        string dAta;
+        cout<<"enter received Date like this day/month/year "<<endl;
+        cin>>receivedDate;
+    
+        cout<<"if you suffer from any other disease or take any medicine inter 1 else 2"<<endl;
+       cin>>tAkeanymedicin;
+        if(tAkeanymedicin==1){
+            cout<<"sorry,canont donered"<<endl;
+            return 0;
+         }
+        cout<<"if you suffer from any disease (blood pressure disorders,thyroid disease,diabetes,cancer,heart disorders,hepatitis inter 1 else inter  2"<<endl;
+        cin>>dIsease;
+         if(dIsease==1){
+            cout<<"sorry,canont donered"<<endl;
+            return 0;
+         }
+       
+    //     cout<<"if you suffer from any other disease or take any medicine"<<endl;
+    //   cin>>tAkeanymedicin;
+   
+         logindoner(iD,nAme,pAssword,gEnder,bLoodtype,aGe,mAil,dIsease,tAkeanymedicin,receivedDate);
+        // login("225092","yasmin","yasmin225092","fmale","A+",20,"yasmin@225092",false,false,"20/12");
+        }
+        else {
+         
+        string hospital;
+        string doctorTheCace;
+        cout<<"enter hospital "<<endl;
+        cin>>hospital;
+        cout<<"enter doctorTheCace "<<endl;
+        cin>>doctorTheCace;
+
+cout<<"enter expiry Date as day/month/year"<<endl;
+        cin>>expiryDate;
+        loginrecipient(iD,nAme,pAssword,gEnder,bLoodtype,aGe,mAil,hospital,doctorTheCace);
+        string bloodch;
+        requestBlood();
+        //string bloodch;
+         cout<<"what the BLood is needed"<<endl;
+        cin>>bloodch;
+        search(bloodch);
+        deletboold(bloodch);
+        deletrecipient(bloodch);
+        }
+        if(expiryDate=="/0")
+        {
+            expiryDate="no blood type was donated";
+        }
+
+       
+       inserboold(nAme,qu,receivedDate,expiryDate);
+        }
+      int gg; 
+        cout<<"if you enter other doner or recipient enter 1 or if you not need enter 2"<<endl;
+        cin>>gg;
+        if(gg==2){
+         f=false;
+        }
+     
+      
+        }
+        displayInfo();
+      
+       
+       
+      
+       
+       
+    return 0;
+}
